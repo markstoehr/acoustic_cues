@@ -36,6 +36,24 @@ python $local/compute_class_specific_features.py --root_dir $dir \
     --out_suffix classspec_5C_9T9F4O.npy \
     --out_prefix $exp 
 
+
+export PYTHONPATH=/var/tmp/stoehr
+
+python $local/discriminative_class_specific_part_training.py --root_dir $dir \
+    --data_dir $pc_data/ \
+    --use_sparse_suffix bsparse.npy \
+    --dev_sparse_suffix dev_bsparse.npy \
+    --total_iter 200 \
+    --total_init 8 \
+    --ncomponents_per_class 5 \
+    --part_size 9 9 \
+    --noverlap 4 \
+    --out_suffix classspec_5C_9T9F4O.npy \
+    --out_prefix $exp \
+    --tol 1e-6 \
+    --min_counts 30 \
+
+
 python $local/fast_48phone_EM.py --root_dir $dir \
     --in_prefix $exp/ \
     --in_suffix classspec_5C_9T9F4O.npy \
